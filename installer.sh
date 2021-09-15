@@ -7,14 +7,21 @@ display_help()
 
 import_dotfiles()
 {
-    #Look for files in specific locations
-    #.vimrc 
+    #VIM 
     VIMRC=~/.vimrc
     if [ -f "$VIMRC" ]; then
 		echo "Copying .vimrc"
 		cp ~/.vimrc ./stash/.vimrc
     else
 		echo "No .vimrc found, skipping"
+    fi
+    #I3
+    I3=~/.config/i3/config
+    if [ -f "$I3" ]; then
+		echo "Copying i3 config"
+		cp $I3 ./stash/i3/config
+    else
+		echo "No .i3 config file found, skipping"
     fi
 }
 
@@ -32,8 +39,10 @@ find_or_create_stash()
 	if [ ! -d "$STASH" ]; then
 		echo "Creating stash folder at $STASH"
 		mkdir ./stash
+		mkdir ./stash/i3
+		mkdir ./stash/i3status
 	else
-		echo "Stash found at $STASH"
+		echo "Stash folder found at $STASH"
 	fi
 }
 
