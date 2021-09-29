@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+#TODO: Add a json file with all the dotfiles entry that should be synchronized. 
+#Should be easier to just iterate the json file and import/export logic inside a loop.
 
 display_help()
 {
@@ -11,7 +13,15 @@ import_dotfiles()
     VIMRC=~/.vimrc
     if [ -f "$VIMRC" ]; then
 		echo "Copying .vimrc"
-		cp ~/.vimrc ./stash/.vimrc
+		cp $VIMRC ./stash/.vimrc
+    else
+		echo "No .vimrc found, skipping"
+    fi
+    #VIM PLUGS
+    VIMPLUGS=~/.vim/plugins.vim
+    if [ -f "$VIMPLUGS" ]; then
+		echo "Copying vim plugins"
+		cp $VIMPLUGS ./stash/plugins.vim
     else
 		echo "No .vimrc found, skipping"
     fi
